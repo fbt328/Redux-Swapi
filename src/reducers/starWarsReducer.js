@@ -1,11 +1,12 @@
 // import /* we need our action types here*/ "../actions";
-import CHARS_FETCHING from "../actions";
-import CHARS_SUCCESS from "../actions";
-import CHARS_FAILURE from "../actions";
+import { CHARS_FETCHING } from "../actions";
+import { CHARS_SUCCESS } from "../actions";
+import { CHARS_FAILURE } from "../actions";
+
 const initialState = {
-  characters: []
+  characters: [],
   fetching: false,
-  error: null
+  error: null,
   // Array characters, Boolean fetching, null error.
 };
 export const charsReducer = (state = initialState, action) => {
@@ -13,9 +14,9 @@ export const charsReducer = (state = initialState, action) => {
     case CHARS_FETCHING:
       return {...state, fetching: true};
     case CHARS_SUCCESS:
-      return {...state, fetching: false, characters: [state.characters, action.payload]/*something w/ char data?*/}
+      return {...state, fetching: false, characters: [...state.characters, ...action.payload]};
     case CHARS_FAILURE:
-      return {...state, error: action.payload }
+      return {...state, error: action.payload };
     default:
       return state;
   }
